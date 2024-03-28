@@ -1,0 +1,29 @@
+version: 1
+trunk:
+  - id: ansible
+    paths:
+      - '**/*.yml'
+      - '**/*.yaml'
+    commands:
+      - 'ansible-lint'
+  - id: markdown
+    paths:
+      - '**/*.md'
+    commands:
+      - 'markdownlint'
+  - id: python
+    paths:
+      - '**/*.py'
+    commands:
+      - 'black --check' # BEGIN: Python Black formatter
+      - 'bandit -r .'   # BEGIN: Bandit for security checks
+  - id: shell
+    paths:
+      - '**/*.sh'
+    commands:
+      - 'shellcheck'
+  - id: docker # BEGIN: Docker linter
+    paths:
+      - '**/Dockerfile'
+    commands:
+      - 'hadolint' # END: Docker linter
